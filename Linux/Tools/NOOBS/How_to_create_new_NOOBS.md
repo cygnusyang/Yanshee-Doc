@@ -20,27 +20,27 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
 
 1. 烧录Raspbian image．
   - 如果是Linux，使用如下命令烧录系统到SD卡  
-  ```bash
+  ```
   dd if=<raspbian.img> of=/dev/sdX bs=8M
   ```
   - 如果是Windows，请下载对应工具烧录SD卡
 2. 安装依赖
   - 下载并执行Yanshee-Build
   使用帮助请参看[README.md](https://10.10.1.34/Yanshee/Yanshee-Build/blob/master/README.md)  
-  ```bash
+  ```
   git clone git@gitlab.ubt.com:Yanshee/Yanshee-Build.git
   ./build.sh
   ```
 3. 为NOOBS制作boot.tar.xz及root.tar.xz
   - 创建对应的挂载点  
-  ```bash
+  ```
   sudo mkdir -p /mnt/img1
   sudo mkdir -p /mnt/img2
   ```
   - 查看SD卡分区情况，得到/boot及/root分区
 
     下面的例子是SD被分配到/dev/sdc，其对应的分区是/boot对应/dev/sdc1, /root对应/dev/sdc2  
-    ```bash
+    ```
     fdisk -l
 
     Disk /dev/sdc: 14.9 GiB, 15931539456 bytes, 31116288 sectors
@@ -55,12 +55,12 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
     /dev/sdc2       98304 31116287 31017984 14.8G 83 Linux
     ```
   - 挂载对应分区到挂载点  
-    ```bash
+    ```
     sudo mount /dev/sdc1 /mnt/img1
     sudo mount /dev/sdc2 /mnt/img2
     ```
   - 创建boot.tar.xz和root.tar.xz  
-    ```bash
+    ```
     cd /mnt/img1
     sudo mkdir -p /devnfs/target/
     bsdtar --numeric-owner --format gnutar -cvpf /devnfs/target/boot.tar .
@@ -73,7 +73,7 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
 4. 自定义NOOBS
   - 创建os目录  
     <b>请从老版本里面copy对应文件，再做修改.</b>
-    ```bash
+    ```
     os.json                      //系统描述
     partitions.json              //分区描述
     boot.tar                      //boot分区文件
@@ -84,7 +84,7 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
     partition_setup.sh      //分区脚本，在系统安装完成后立即执行，如无则需要在cmdline.txt设定root分区位置
     ```
     os目录结构如下，请创建如下文件．  
-    ```bash
+    ```
     tree .
     .
     └── Raspbian
@@ -110,7 +110,7 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
   - 设置自动安装
     + 复制os目录到NOOBS的os目录中
     + 添加flavours.json.　请注意,flavous.json中只添加要自动安装的项.  
-      ```bash
+      ```
       cat flavours.json
       {
         "flavours": [
@@ -121,4 +121,4 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
         ]
       }
       ```  
-    +　在recovery.cmdline文件里后添加silentinstall参数
+    + 在recovery.cmdline文件里后添加silentinstall参数
