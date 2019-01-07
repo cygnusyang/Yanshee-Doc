@@ -108,8 +108,13 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
         └── Thumbs.db
     ```  
   - 设置自动安装
-    + 复制os目录到NOOBS的os目录中
-    + 添加flavours.json.　请注意,flavous.json中只添加要自动安装的项.  
+    1. 复制os目录到NOOBS的os目录中
+    ```
+    ls -l os
+    total 4
+    drwxrwxr-x 3 <user> <usergroup> 4096 Sep 29 09:42 Raspbian    
+    ```
+    2. 添加flavours.json.　请注意,flavous.json中只添加要自动安装的项.  
       ```
       cat flavours.json
       {
@@ -121,4 +126,8 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
         ]
       }
       ```  
-    + 在recovery.cmdline文件里后添加silentinstall参数
+    3. 在recovery.cmdline文件里后添加silentinstall参数
+    ```
+    cat recovery.cmdline
+    runinstaller quiet ramdisk_size=32768 root=/dev/ram0 init=/init vt.cur_default=1 elevator=deadline silentinstall
+    ```
