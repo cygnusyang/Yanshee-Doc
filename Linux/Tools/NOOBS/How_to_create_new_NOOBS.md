@@ -20,6 +20,7 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
 
 1. 烧录Raspbian image．
   - 如果是Linux，使用如下命令烧录系统到SD卡  
+  
   ```
   dd if=<raspbian.img> of=/dev/sdX bs=8M
   ```
@@ -27,12 +28,14 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
 2. 安装依赖
   - 下载并执行Yanshee-Build
   使用帮助请参看[README.md](https://10.10.1.34/Yanshee/Yanshee-Build/blob/master/README.md)  
+  
   ```
   git clone git@gitlab.ubt.com:Yanshee/Yanshee-Build.git
   ./build.sh
   ```
 3. 为NOOBS制作boot.tar.xz及root.tar.xz
   - 创建对应的挂载点  
+  
   ```
   sudo mkdir -p /mnt/img1
   sudo mkdir -p /mnt/img2
@@ -40,6 +43,7 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
   - 查看SD卡分区情况，得到/boot及/root分区
 
     下面的例子是SD被分配到/dev/sdc，其对应的分区是/boot对应/dev/sdc1, /root对应/dev/sdc2  
+    
     ```
     fdisk -l
 
@@ -55,11 +59,13 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
     /dev/sdc2       98304 31116287 31017984 14.8G 83 Linux
     ```
   - 挂载对应分区到挂载点  
+    
     ```
     sudo mount /dev/sdc1 /mnt/img1
     sudo mount /dev/sdc2 /mnt/img2
     ```
   - 创建boot.tar.xz和root.tar.xz  
+    
     ```
     cd /mnt/img1
     sudo mkdir -p /devnfs/target/
@@ -73,6 +79,7 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
 4. 自定义NOOBS
   - 创建os目录  
     <b>请从老版本里面copy对应文件，再做修改.</b>
+    
     ```
     os.json                      //系统描述
     partitions.json              //分区描述
@@ -84,6 +91,7 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
     partition_setup.sh      //分区脚本，在系统安装完成后立即执行，如无则需要在cmdline.txt设定root分区位置
     ```
     os目录结构如下，请创建如下文件．  
+    
     ```
     tree .
     .
@@ -109,12 +117,14 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
     ```  
   - 设置自动安装
     1. 复制os目录到NOOBS的os目录中
+    
     ```
     ls -l os
     total 4
     drwxrwxr-x 3 <user> <usergroup> 4096 Sep 29 09:42 Raspbian    
     ```
     2. 添加flavours.json.　请注意,flavous.json中只添加要自动安装的项.  
+      
       ```
       cat flavours.json
       {
@@ -127,6 +137,7 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
       }
       ```  
     3. 在recovery.cmdline文件里后添加silentinstall参数
+    
     ```
     cat recovery.cmdline
     runinstaller quiet ramdisk_size=32768 root=/dev/ram0 init=/init vt.cur_default=1 elevator=deadline silentinstall
