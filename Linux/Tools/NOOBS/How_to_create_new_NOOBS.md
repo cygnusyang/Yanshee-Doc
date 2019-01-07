@@ -21,25 +21,25 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
 1. 烧录Raspbian image．
   - 如果是Linux，使用如下命令烧录系统到SD卡  
   
-  ```
-  dd if=<raspbian.img> of=/dev/sdX bs=8M
-  ```
+      ```
+      dd if=<raspbian.img> of=/dev/sdX bs=8M
+      ```
   - 如果是Windows，请下载对应工具烧录SD卡
 2. 安装依赖
   - 下载并执行Yanshee-Build
   使用帮助请参看[README.md](https://10.10.1.34/Yanshee/Yanshee-Build/blob/master/README.md)  
   
-  ```
-  git clone git@gitlab.ubt.com:Yanshee/Yanshee-Build.git
-  ./build.sh
-  ```
+      ```
+      git clone git@gitlab.ubt.com:Yanshee/Yanshee-Build.git
+      ./build.sh
+      ```
 3. 为NOOBS制作boot.tar.xz及root.tar.xz
   - 创建对应的挂载点  
   
-  ```
-  sudo mkdir -p /mnt/img1
-  sudo mkdir -p /mnt/img2
-  ```
+      ```
+      sudo mkdir -p /mnt/img1
+      sudo mkdir -p /mnt/img2
+      ```
   - 查看SD卡分区情况，得到/boot及/root分区
 
     下面的例子是SD被分配到/dev/sdc，其对应的分区是/boot对应/dev/sdc1, /root对应/dev/sdc2  
