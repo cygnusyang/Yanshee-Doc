@@ -19,27 +19,27 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
 ## 步骤
 
 1. 烧录Raspbian image．
-  - 如果是Linux，使用如下命令烧录系统到SD卡
+  - 如果是Linux，使用如下命令烧录系统到SD卡  
   ```bash
   dd if=<raspbian.img> of=/dev/sdX bs=8M
   ```
   - 如果是Windows，请下载对应工具烧录SD卡
 2. 安装依赖
   - 下载并执行Yanshee-Build
-  使用帮助请参看[README.md](https://10.10.1.34/Yanshee/Yanshee-Build/blob/master/README.md)
+  使用帮助请参看[README.md](https://10.10.1.34/Yanshee/Yanshee-Build/blob/master/README.md)  
   ```bash
   git clone git@gitlab.ubt.com:Yanshee/Yanshee-Build.git
   ./build.sh
   ```
 3. 为NOOBS制作boot.tar.xz及root.tar.xz
-  - 创建对应的挂载点
+  - 创建对应的挂载点  
   ```bash
   sudo mkdir -p /mnt/img1
   sudo mkdir -p /mnt/img2
   ```
   - 查看SD卡分区情况，得到/boot及/root分区
 
-    下面的例子是SD被分配到/dev/sdc，其对应的分区是/boot对应/dev/sdc1, /root对应/dev/sdc2
+    下面的例子是SD被分配到/dev/sdc，其对应的分区是/boot对应/dev/sdc1, /root对应/dev/sdc2  
     ```bash
     fdisk -l
 
@@ -54,12 +54,12 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
     /dev/sdc1        8192    98045    89854 43.9M  c W95 FAT32 (LBA)
     /dev/sdc2       98304 31116287 31017984 14.8G 83 Linux
     ```
-  - 挂载对应分区到挂载点
+  - 挂载对应分区到挂载点  
     ```bash
     sudo mount /dev/sdc1 /mnt/img1
     sudo mount /dev/sdc2 /mnt/img2
     ```
-  - 创建boot.tar.xz和root.tar.xz
+  - 创建boot.tar.xz和root.tar.xz  
     ```bash
     cd /mnt/img1
     sudo mkdir -p /devnfs/target/
@@ -72,7 +72,7 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
     ```
 4. 自定义NOOBS
   - 创建os目录  
-    请从老版本里面copy对应文件，再做修改.
+    <b>请从老版本里面copy对应文件，再做修改.</b>
     ```bash
     os.json                      //系统描述
     partitions.json              //分区描述
@@ -108,4 +108,17 @@ Yanshee的操作系统是基于Raspbian的重新打包．主要改动如下：
         └── Thumbs.db
     ```  
   - 设置自动安装
-    +
+    + 复制os目录到NOOBS的os目录中
+    + 添加flavours.json.　请注意,flavous.json中只添加要自动安装的项.  
+      ```bash
+      cat flavours.json
+      {
+        "flavours": [
+          {
+            "name": "Raspbian",
+            "description": "Raspbian for Yanshee"
+          }
+        ]
+      }
+      ```  
+    +　在recovery.cmdline文件里后添加silentinstall参数
