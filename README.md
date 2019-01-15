@@ -19,8 +19,8 @@ Yanshee的软件是基于ＲＯＳ的开源框架开发的，支持如下功能�
 
 分类：
 + [Linux](Linux/Linux.md)
-+ [Programming language](Programming language/Programming_language.md)
++ [Programming language](Programming_language/Programming_language.md)
 + [ROS](ROS/ROS.md)
 + [Voice](Voice/Voice.md)
 + [Vision](Vision/Vision.md)
-+ [Motion control](Motion control/Motion_control.md)
++ [Motion control](Motion/Motion_control.md)
