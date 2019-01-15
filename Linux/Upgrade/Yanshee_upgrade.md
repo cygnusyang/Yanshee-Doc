@@ -13,22 +13,22 @@ Yanshee-Raspi是Yanshee最初支持语音，图像及运动的软件．主要由
 升级到Yanshee-Raspi v1.3.4.5．然后Yanshee会提示有新版本，是否升级．请语音回答＂升级＂
 这时候Yanshee文件系统分区如下：  
 
-![Yanshee文件系统分区](Yanshee upgrade/升级原理_步骤１.png)
+![Yanshee文件系统分区](Yanshee_upgrade/升级原理_步骤１.png)
 
 2. 步骤２：  
 语音回答升级后，Yanshee会下载v1.5.0.1版本．然后将第一个分区（noobs分区)挂载到root分区上．并在校验下载文件的md5值后，开始安装文件到noobs分区．安装完成后系统分自动启动．  
 这时候Yanshee文件系统分区如下：　　
 
-![Yanshee文件系统分区](Yanshee upgrade/升级原理_步骤2.png)
+![Yanshee文件系统分区](Yanshee_upgrade/升级原理_步骤2.png)
 
 3. 步骤３：  
 启动重启后会直接进入noobs安装．noobs在安装新系统的时候会将noobs分区重新分成3.0G．然后系统启动后会提示正在升级，并下载新的v1.5.1.1版本.
 这时候Yanshee文件系统分区如下：　　
 
-![Yanshee文件系统分区](Yanshee upgrade/升级原理_步骤3.png)
+![Yanshee文件系统分区](Yanshee_upgrade/升级原理_步骤3.png)
 
 4. 步骤４：  
 在v1.5.１.1版本下载完成后，系统会再次安装新的系统到noobs分区，这时候noobs分区已经是3.0G．安装完成后，系统会再次进入noobs安装界面．  
 这时候Yanshee文件系统分区如下：　　
 
-![Yanshee文件系统分区](Yanshee upgrade/升级原理_步骤4.png)
+![Yanshee文件系统分区](Yanshee_upgrade/升级原理_步骤4.png)
