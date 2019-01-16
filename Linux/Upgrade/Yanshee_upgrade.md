@@ -7,6 +7,9 @@ Yanshee-Raspi是Yanshee最初支持语音，图像及运动的软件．主要由
 # 升级原理
 当前树莓派由noobs安装，在sd卡的最开始位置有大概1.2G的分区是用来存放noobs文件．当用户需要把/boot分区或都/root分区回到原始状态的时候，可以启动noobs恢复．但是Yanshee-ROS对noobs的需求大概在3.0G左右，所以需要在系统启动的时候将noobs分区扩大．  
 
+升级流程如下：  
+![](Yanshee_upgrade/升级流程.png)
+
 # 升级步骤
 **在升级过程中请不要换网络，因为升级过程中需要下载安装包，如果无线网络改变．将会下载失败，只能把Yanshee拆开，[直接用SD卡升级](https://github.com/raspberrypi/noobs)**
 1. 步骤１：  
